@@ -1,6 +1,6 @@
 # TODO
 # - initscript+config
-%define	rel		1
+%define	rel		2
 %define	subver	83298
 Summary:	DBGp Proxy for PHP Xdebug
 Name:		dbgpproxy
