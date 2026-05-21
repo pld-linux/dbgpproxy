@@ -1,6 +1,6 @@
 # TODO
 # - initscript+config
-%define	rel		2
+%define	rel		3
 %define	subver	83298
 Summary:	DBGp Proxy for PHP Xdebug
 Name:		dbgpproxy
@@ -31,7 +31,7 @@ Komodo, or any of the other clients) and PHP+Xdebug.
 %ifarch %{x8664}
 %setup -qcT -b 1
 %endif
-mv Komodo-PythonRemoteDebugging-%{version}-%{subver}-linux-*/* .
+mv ../Komodo-PythonRemoteDebugging-%{version}-%{subver}-linux-*/* .
 
 cd pythonlib
 py_ver=$(echo %py_ver | tr -d .)
@@ -42,6 +42,7 @@ mv _client$py_ver.so dbgp
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{py_sitescriptdir}/dbgp}
+%{__sed} -i -e '1s,#!.*python.*,#!%{__python},' pydbgpproxy
 install -p pydbgpproxy $RPM_BUILD_ROOT%{_bindir}
 cp -a pythonlib/* $RPM_BUILD_ROOT%{py_sitescriptdir}
 
